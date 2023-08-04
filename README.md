@@ -1,8 +1,6 @@
 # snappy compression of genesis.ssz files for Lighthouse
 
-The following is a summary of an issue written by paulhauner
-
-Lighthouse currently includes the uncompressed `genesis.ssz` for several supported networks as part of their binary. The total size of the genesis files is almost 60M, which makes up more than half of the total binary size (~110M). We could decrease the size of the binary by storing the compressed `genesis.ssz` bytes in the binary and decompressing them at start-up.
+A summary of an issue written by paulhauner: Lighthouse currently includes the uncompressed `genesis.ssz` for several supported networks as part of their binary. The total size of the genesis files is almost 60M, which makes up more than half of the total binary size (~110M). We could decrease the size of the binary by storing the compressed `genesis.ssz` bytes in the binary and decompressing them at start-up.
 
 This repo focuses on using snappy compression/decompression on `genesis.ssz` for mainnet and prater. The goal here is to understand the time it takes to decompress these files as we don't want to dramatically slow-down BN/VC startup.
 
@@ -26,4 +24,4 @@ decompressed prater: 29.8M
 compressed prater: 18.1M
 ```
 
-Snappy compression seems to reduce file size by ~50%, while increasing start-up time by potentially 10s of seconds.
+Snappy compression seems to reduce file size by ~50%, while increasing start-up time by potentially 10s of seconds. The decompression time is based on my local machine which is a Macbook pro w/ 64gb of RAM + M1 Max chip. The decompression time could vary based on user hardware.
